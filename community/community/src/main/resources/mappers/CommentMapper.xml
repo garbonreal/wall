@@ -8,23 +8,23 @@
     </resultMap>
 
     <insert id="insertByContentUidTidNum" parameterType="com.lyh.community.entity.Comment">
-        INSERT INTO comment (content, uid, tid, num) VALUES (#{content}, #{uid}, #{tid}, #{num})
+        INSERT INTO comment (ccontent, tid, canonymous, ctime) VALUES (#{content}, #{tid}, #{canonymous}, #{ctime})
     </insert>
 
     <select id="selectMaxNumByTid" resultType="String" parameterType="com.lyh.community.entity.Comment">
         select MAX(num) from comment group by tid having tid=#{tid}
     </select>
 
-    <delete id="deleteByTidNum" parameterType="com.lyh.community.entity.Comment">
-    	delete from comment where tid = #{tid} and num = #{num}
+    <delete id="deleteByTidCtime" parameterType="com.lyh.community.entity.Comment">
+    	delete from comment where tid = #{tid} and ctime = #{ctime}
   	</delete>
 
-    <select id="selectUidByTidNum" resultType="int" parameterType="com.lyh.community.entity.Comment">
-        select uid from comment where tid = #{tid} and num = #{num}
-    </select>
+<!--    <select id="selectUidByTidNum" resultType="int" parameterType="com.lyh.community.entity.Comment">-->
+<!--        select uid from comment where tid = #{tid} and num = #{num}-->
+<!--    </select>-->
 
-    <select id="selectAllByTidOrderByNum" resultType="com.lyh.community.entity.Comment" parameterType="com.lyh.community.entity.Comment">
-        select user.uname,comment.* from comment,user where tid = #{tid} and comment.uid = user.uid
+    <select id="selectAllByTid" resultType="com.lyh.community.entity.Comment" parameterType="com.lyh.community.entity.Comment">
+        select user.uname,comment.* from comment,user where tid = #{tid}
     </select>
 
     <update id="updateAddLikeByTidNum" parameterType="com.lyh.community.entity.Comment">
@@ -35,8 +35,8 @@
         select cid from comment where tid = #{tid} and num = #{num}
     </select>
 
-    <select id="selectCountByTidNum" resultType="int" parameterType="com.lyh.community.entity.Comment">
-        select count(1) from comment where tid = #{tid} and num = #{num}
+    <select id="selectCountByTidCtime" resultType="int" parameterType="com.lyh.community.entity.Comment">
+        select count(1) from comment where tid = #{tid} and ctime = #{ctime}
     </select>
 
 </mapper>

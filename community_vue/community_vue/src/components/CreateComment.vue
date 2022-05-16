@@ -4,6 +4,13 @@
     <el-form-item label="评论内容" prop="content">
       <el-input type="textarea" v-model="ruleForm.content"></el-input>
     </el-form-item>
+    <el-form-item label="隐私" prop="tanonymous">
+      <el-radio-group v-model="ruleForm.canonymous">
+        <el-radio :label="0">匿名</el-radio>
+        <el-radio :label="1">公开</el-radio>
+      </el-radio-group>
+    </el-form-item>
+
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
       <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -21,7 +28,8 @@
           content:'',
           email:'',
           password:'',
-          tname:''
+          ttime:'',
+          canonymous:''
         },
         rules: {
           content: [
@@ -32,9 +40,21 @@
       };
     },
     methods: {
+      getdate() {
+        var gettime
+        let yy = new Date().getFullYear();
+        let mm = new Date().getMonth()+1;
+        let dd = new Date().getDate();
+        let hh = new Date().getHours();
+        let mf = new Date().getMinutes()<10 ? '0'+new Date().getMinutes() : new Date().getMinutes();
+        let ss = new Date().getSeconds()<10 ? '0'+new Date().getSeconds() : new Date().getSeconds();
+        gettime = yy+'-'+mm+'-'+ dd +' '+hh+':'+mf+':'+ss;
+        return gettime
+      },
       submitForm(formName) {
         const _this=this;
-        let tname=this.$route.query.tname;
+        let ttime=this.$route.query.ttime;
+        _this.ruleForm.ctime = this.getdate();
         this.$refs[formName].validate((valid) => {
           if (valid) {
             // alert('submit!');
@@ -44,11 +64,13 @@
               // alert(_this.Varall._password);
 
               const params = new URLSearchParams();
-              params.append('tname',tname);
+              params.append('ttime',ttime);
               params.append('content',_this.ruleForm.content);
               params.append('email', _this.Varall._email);
               params.append('password', _this.Varall._password);
               params.append('mname', _this.Varall._currentmname);
+              params.append('ccanonymous', _this.ruleForm.canonymous);
+              params.append('ctime', _this.ruleForm.ctime);
               this.$axios.post('http://localhost:8080/comment/createComment',params).then(function (resp) {
                 console.log(resp)
                 if(resp.data.code=="499"){

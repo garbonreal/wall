@@ -14,9 +14,7 @@ public class Topic {
 //    private int clike =0;
     private String uname;
     private int tanonymous;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    private Date ttime;
+    private String ttime;
 
     public int getTid() {
         return tid;
@@ -82,11 +80,11 @@ public class Topic {
         this.tanonymous = tanonymous;
     }
 
-    public Date getTtime() {
+    public String getTtime() {
         return ttime;
     }
 
-    public void setTtime(Date ctime) {
+    public void setTtime(String ctime) {
         this.ttime = ctime;
     }
 }

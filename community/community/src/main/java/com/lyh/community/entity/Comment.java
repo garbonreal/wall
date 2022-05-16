@@ -7,14 +7,11 @@ import java.util.Date;
 
 public class Comment {
     private int cid;
-    private String content;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    private Date ctime;
+    private String ccontent;
+    private String ctime;
     private int uid;
     private int tid;
-    private int clike =0;
-    private int num=-1;
+    private int canonymous;
     private String uname;
 
     public int getCid() {
@@ -25,19 +22,19 @@ public class Comment {
         this.cid = cid;
     }
 
-    public String getContent() {
-        return content;
+    public String getCcontent() {
+        return ccontent;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setCcontent(String ccontent) {
+        this.ccontent = ccontent;
     }
 
-    public Date getCtime() {
+    public String getCtime() {
         return ctime;
     }
 
-    public void setCtime(Date ctime) {
+    public void setCtime(String ctime) {
         this.ctime = ctime;
     }
 
@@ -57,20 +54,12 @@ public class Comment {
         this.tid = tid;
     }
 
-    public int getClike() {
-        return clike;
+    public int getCanonymous() {
+        return canonymous;
     }
 
-    public void setClike(int clike) {
-        this.clike = clike;
-    }
-
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
+    public void setCcanonymous(int ccanonymous) {
+        this.canonymous = ccanonymous;
     }
 
     public String getUname() {

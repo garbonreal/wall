@@ -28,34 +28,30 @@ public class TopicService implements ITopicService {
     private IFavoriteDao iFavoriteDao;
 
     @Override
-    public Resp<Topic> createTopic(String intro, String email, String password, int tanonymous, String date, String mname) {
+    public Resp<Topic> createTopic(String intro, String email, String password, int tanonymous, String ttime, String mname) {
         if(iUserDao.selectCountByEmailPassword(email, DigestUtils.md5DigestAsHex(password.getBytes()))==0){
             return Resp.fail("499","身份验证错误！");
         }
-        // 没有 tname 不用检查是否存在话题
-//        else if(iTopicDao.selectCountByTnameMid(tname,iModuleDao.selectMidByMname(mname))==1){
-//            return Resp.fail("420","话题已存在！");
-//        }
         else{
-
-            iTopicDao.insertByTnameIntroMidUid(intro,tanonymous,date,iModuleDao.selectMidByMname(mname),iUserDao.selectUidByEmail(email));
+            iTopicDao.insertByTnameIntroMidUid(intro,tanonymous,ttime,iModuleDao.selectMidByMname(mname),iUserDao.selectUidByEmail(email));
+            System.out.print(ttime);
             return Resp.success(null);
         }
     }
 
     @Override
-    public Resp<Topic> deleteTopic(String tname, String email, String password, String mname) {
+    public Resp<Topic> deleteTopic(String ttime, String email, String password, String mname) {
         if(iUserDao.selectCountByEmailPassword(email,DigestUtils.md5DigestAsHex(password.getBytes()))==0){
             return Resp.fail("499","身份验证错误！");
         }
-        else if(iTopicDao.selectCountByTnameMid(tname, iModuleDao.selectMidByMname(mname))==0){
+        else if(iTopicDao.selectCountByTtimeMid(ttime, iModuleDao.selectMidByMname(mname))==0){
             return Resp.fail("421","话题不存在！");
         }
-        else if(iTopicDao.selectUidByTnameMid(tname,iModuleDao.selectMidByMname(mname))!=iUserDao.selectUidByEmail(email)&&iModuleDao.selectUidByMid(iModuleDao.selectMidByMname(mname))!=iUserDao.selectUidByEmail(email)){
+        else if(iTopicDao.selectUidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname))!=iUserDao.selectUidByEmail(email)&&iModuleDao.selectUidByMid(iModuleDao.selectMidByMname(mname))!=iUserDao.selectUidByEmail(email)){
             return Resp.fail("488","用户无权限！");
         }
         else{
-            iTopicDao.deleteByTnameMid(tname,iModuleDao.selectMidByMname(mname));
+            iTopicDao.deleteByTtimeMid(ttime,iModuleDao.selectMidByMname(mname));
             return Resp.success(null);
         }
     }
@@ -99,8 +95,16 @@ public class TopicService implements ITopicService {
         else{
             int mid = iModuleDao.selectMidByMname(mname);
             PageHelper.startPage(pageNum,pageSize);
-            PageInfo<Topic> pageInfo = new PageInfo<Topic>(iTopicDao.selectAllByMid(mid));
+            List<Topic> TopicList = iTopicDao.selectAllByMid(mid);
+            for (Topic topic : TopicList) {
+                if(topic.getTanonymous()==0){
+                    topic.setUname("匿名");
+                }
+            }
+            PageInfo<Topic> pageInfo = new PageInfo<Topic>(TopicList);
+
             System.out.print(pageInfo);
+
             return Resp.success(pageInfo);
         }
     }
@@ -110,7 +114,7 @@ public class TopicService implements ITopicService {
         if(iUserDao.selectCountByEmailPassword(email,DigestUtils.md5DigestAsHex(password.getBytes()))==0){
             return Resp.fail("499","身份验证错误！");
         }
-        else if(iTopicDao.selectCountByTnameMid(tname,iModuleDao.selectMidByMname(mname))==0){
+        else if(iTopicDao.selectCountByTtimeMid(tname,iModuleDao.selectMidByMname(mname))==0){
             return Resp.fail("421","话题不存在！");
         }
         else if(iLikeTopicDao.selectCountByUidTid(iUserDao.selectUidByEmail(email),iTopicDao.selectTidByTnameMid(tname,iModuleDao.selectMidByMname(mname)))==1){
@@ -128,7 +132,7 @@ public class TopicService implements ITopicService {
         if(iUserDao.selectCountByEmailPassword(email,DigestUtils.md5DigestAsHex(password.getBytes()))==0){
             return Resp.fail("499","身份验证错误！");
         }
-        else if(iTopicDao.selectCountByTnameMid(tname,iModuleDao.selectMidByMname(mname))==0){
+        else if(iTopicDao.selectCountByTtimeMid(tname,iModuleDao.selectMidByMname(mname))==0){
             return Resp.fail("421","话题不存在！");
         }
         else if(iFavoriteDao.selectCountByUidTid(iUserDao.selectUidByEmail(email),iTopicDao.selectTidByTnameMid(tname,iModuleDao.selectMidByMname(mname)))==1){

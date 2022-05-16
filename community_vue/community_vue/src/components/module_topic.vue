@@ -11,7 +11,7 @@
       <el-table-column
         prop="ttime"
         label="日期"
-        width="150">
+        width="200">
       </el-table-column>
 
       <el-table-column
@@ -80,11 +80,11 @@
         })
       },
       moreinfro(num){
-        this.Varall._currenttname = num.tname;
-        sessionStorage.setItem("currenttname",num.tname);
+        this.Varall._currenttime = num.ttime;
+        sessionStorage.setItem("currenttime",num.ttime);
         this.$router.push({
           path: "/topic_comment", query: {
-            tname: num.tname
+            ttime: num.ttime
           }
         })
       },tlike(num){
@@ -147,8 +147,9 @@
           const params = new URLSearchParams();
           params.append('email', _this.Varall._email);
           params.append('password', _this.Varall._password);
-          params.append('tname',num.tname);
+          params.append('ttime',num.ttime);
           params.append('mname',_this.Varall._currentmname);
+
           this.$axios.post('http://localhost:8080/topic/deleteTopic',params).then(function (resp) {
             console.log(resp)
             if(resp.data.code=="499"){

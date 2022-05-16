@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public interface ICommentService {
-    Resp<Comment> createComment(String content, String email, String password, String tname, String mname);//后台需要给评论安排序号
+    Resp<Comment> createComment(String content, String email, String password, String ttime, int ccanonymous, String ctime, String mname);//后台需要给评论安排序号
 
-    Resp<Comment> deleteComment(int num, String email, String password, String tname, String mname);
+    Resp<Comment> deleteComment(String email, String password, String ttime, String mname, String ctime);
 
-    Resp<PageInfo<Comment>> showCommentByTopic(String tname, int pageNum, int pageSize, String mname);
+    Resp<PageInfo<Comment>> showCommentByTopic(String ttime, int pageNum, int pageSize, String mname);
 
     Resp<Comment> likeComment(String email, String password, String tname, int num, String mname);//需要验证likeComment表
 }
