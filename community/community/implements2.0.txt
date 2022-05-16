@@ -1,0 +1,33 @@
+有返回的情况下，code为200是ok，code777是参数错误
+
+例子：http://121.36.2.102:8989/user/login
+/sms
+	/sendEmailCode		email					//获取验证码发邮箱，无返回值
+/user
+	/login			email, password				//用户名密码登录，返回基本用户信息 code777参数错误
+	/register			uname, password, email, code		//注册，code是要提前获取的验证码 code777参数错误 code666验证码错误
+	/modifybasic		email, uname, password, sex, age, motto	//修改基础信息（除了邮箱和密码）777参数错误
+	/changePassword		email, oldpassword, newpassword		//
+	/changeEmail		oldemail, newemail, password, code
+	/showInfo		email, password
+
+/module
+	/createModule		mname, intro, email, password
+	/deleteModule		mname, email, password
+	/showModuleByUid	email, password, pageNum, pageSize
+	/showModule		pageNum, pageSize
+
+/topic
+	/createTopic		tname, intro, email, password, mname
+	/deleteTopic		tname, email, password
+	/showTopicByUid		email, password, pageNum, pageSize
+	/showFavoriteByUid	email, password, pageNum, pageSize
+	/showTopicByModule	mname, pageNum, pageSize
+	/likeTopic			email, password, tname
+	/favorite			email, password, tname
+
+/comment
+	/createComment		content, email, password, tname
+	/deleteComment		num, email, password, tname
+	/showCommentByTopic	tname, pageNum, pageSize
+	/likeComment		email, password, tname, num

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyh.community.dao.IUserDao">
+
+    <resultMap type="com.lyh.community.entity.User" id="UserRM">
+    </resultMap>
+
+    <select id="selectCountByEmailPassword" resultType="int" parameterType="com.lyh.community.entity.User">
+        select COUNT(1) from user where email=#{email} and password=#{password}
+    </select>
+
+    <select id="selectAllByEmailPassword" resultType="com.lyh.community.entity.User" parameterType="com.lyh.community.entity.User">
+        select uname,sex,age,email from user where email=#{email} and password=#{password}
+    </select>
+
+    <select id="selectCountByEmail" resultType="int" parameterType="com.lyh.community.entity.User">
+        select COUNT(1) from user where email=#{email}
+    </select>
+
+    <insert id="insertByEmailPasswordUname" parameterType="com.lyh.community.entity.User">
+        INSERT INTO user (email, password, uname) VALUES (#{email}, #{password}, #{uname})
+    </insert>
+
+    <update id="updateAllExpectEmailPassword" parameterType="com.lyh.community.entity.User">
+        UPDATE user SET uname = #{uname}, sex = #{sex}, age = #{age} WHERE email = #{email}
+    </update>
+
+    <update id="updatePassword" parameterType="com.lyh.community.entity.User">
+        UPDATE user SET password = #{password} WHERE email = #{email}
+    </update>
+
+    <update id="updateEmail" parameterType="com.lyh.community.entity.User">
+        UPDATE user SET email = #{newemail} WHERE email = #{oldemail}
+    </update>
+
+    <select id="selectUidByEmail" resultType="int" parameterType="com.lyh.community.entity.User">
+        select uid from user where email=#{email}
+    </select>
+
+</mapper>

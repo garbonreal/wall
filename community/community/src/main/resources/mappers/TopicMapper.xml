@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyh.community.dao.ITopicDao">
+
+    <resultMap type="com.lyh.community.entity.Topic" id="TopicRM">
+    </resultMap>
+
+    <select id="selectCountByTnameMid" resultType="int" parameterType="com.lyh.community.entity.Topic">
+        select COUNT(1) from topic where tname=#{tname} and mid=#{mid}
+    </select>
+
+    <insert id="insertByTnameIntroMidUid" parameterType="com.lyh.community.entity.Topic">
+        INSERT INTO topic (tcontent, tanonymous, ttime, mid, uid) VALUES (#{intro}, #{tanonymous}, #{date}, #{mid}, #{uid})
+    </insert>
+
+    <delete id="deleteByTnameMid" parameterType="com.lyh.community.entity.Topic">
+    	delete from topic where tname = #{tname} and mid=#{mid}
+  	</delete>
+
+    <select id="selectUidByTnameMid" resultType="int" parameterType="com.lyh.community.entity.Topic">
+        select uid from topic where tname=#{tname} and mid=#{mid}
+    </select>
+
+    <select id="selectAllByUid" resultType="com.lyh.community.entity.Topic" parameterType="com.lyh.community.entity.Topic">
+        select user.uname,module.mname,topic.* from topic,module,user where topic.uid=#{uid} and topic.mid = module.mid and topic.uid = user.uid
+    </select>
+
+    <select id="selectAllByMid" resultType="com.lyh.community.entity.Topic" parameterType="com.lyh.community.entity.Topic">
+        select user.uname,topic.* from topic,user where mid=#{mid} and topic.uid = user.uid
+    </select>
+
+    <select id="selectAll" resultType="com.lyh.community.entity.Topic" parameterType="com.lyh.community.entity.Topic">
+        select user.uname, topic.ttime, topic.tcontent, topic.tanonymous from topic,user where topic.uid = user.uid
+    </select>
+
+    <update id="updateAddLikeByTnameMid" parameterType="com.lyh.community.entity.Topic">
+        UPDATE topic SET clike = clike+1 WHERE tname = #{tname} and mid=#{mid}
+    </update>
+
+    <select id="selectTidByTnameMid" resultType="int" parameterType="com.lyh.community.entity.Topic">
+        select tid from topic where tname=#{tname} and mid=#{mid}
+    </select>
+
+</mapper>
