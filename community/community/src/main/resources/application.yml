@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     name: community
-    url: jdbc:mysql://localhost:3306/wall?useUnicode=yes&characterEncoding=UTF-8&amp&useSSL=false&amp&allowPublicKeyRetrieval=true&amp&serverTimezone=UTC
+    url: jdbc:mysql://1.116.57.190:3306/wan_neng_qiang?useUnicode=yes&characterEncoding=UTF-8&amp&useSSL=false&amp&allowPublicKeyRetrieval=true&amp&serverTimezone=UTC
     username: root
-    password: 110110
+    password: Wn9323252766
     driverClassName : com.mysql.cj.jdbc.Driver
   servlet:
     multipart:
