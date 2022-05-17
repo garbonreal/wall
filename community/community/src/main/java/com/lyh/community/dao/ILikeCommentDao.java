@@ -9,4 +9,6 @@ public interface ILikeCommentDao {
     int selectCountByUidCid(@Param("uid") int uid, @Param("cid") int cid);
 
     void insertByUidCid(@Param("uid") int uid, @Param("cid") int cid);
+    
+    int selectCountByCid(int cid);
 }

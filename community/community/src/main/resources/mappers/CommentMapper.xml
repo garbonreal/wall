@@ -8,15 +8,11 @@
     </resultMap>
 
     <insert id="insertByContentUidTidNum" parameterType="com.lyh.community.entity.Comment">
-        INSERT INTO comment (ccontent, tid, canonymous, ctime) VALUES (#{content}, #{tid}, #{canonymous}, #{ctime})
+        INSERT INTO Comment (ccontent, tid, canonymous, ctime) VALUES (#{content}, #{tid}, #{canonymous}, #{ctime})
     </insert>
 
-    <select id="selectMaxNumByTid" resultType="String" parameterType="com.lyh.community.entity.Comment">
-        select MAX(num) from comment group by tid having tid=#{tid}
-    </select>
-
     <delete id="deleteByTidCtime" parameterType="com.lyh.community.entity.Comment">
-    	delete from comment where tid = #{tid} and ctime = #{ctime}
+    	delete from Comment where tid = #{tid} and ctime = #{ctime}
   	</delete>
 
 <!--    <select id="selectUidByTidNum" resultType="int" parameterType="com.lyh.community.entity.Comment">-->
@@ -24,19 +20,16 @@
 <!--    </select>-->
 
     <select id="selectAllByTid" resultType="com.lyh.community.entity.Comment" parameterType="com.lyh.community.entity.Comment">
-        select user.uname,comment.* from comment,user where tid = #{tid}
+        select User.uname,Comment.* from Comment,User where tid = #{tid}
     </select>
 
     <update id="updateAddLikeByTidNum" parameterType="com.lyh.community.entity.Comment">
-        UPDATE comment SET clike = clike+1 WHERE tid = #{tid} and num = #{num}
+        UPDATE Comment SET clike = clike+1 WHERE tid = #{tid} and num = #{num}
     </update>
-
-    <select id="selectCidByTidNum" resultType="int" parameterType="com.lyh.community.entity.Comment">
-        select cid from comment where tid = #{tid} and num = #{num}
-    </select>
+    
 
     <select id="selectCountByTidCtime" resultType="int" parameterType="com.lyh.community.entity.Comment">
-        select count(1) from comment where tid = #{tid} and ctime = #{ctime}
+        select count(1) from Comment where tid = #{tid} and ctime = #{ctime}
     </select>
 
 </mapper>

@@ -8,11 +8,15 @@
     </resultMap>
 
     <select id="selectCountByUidCid" resultType="int" parameterType="com.lyh.community.entity.LikeComment">
-        select COUNT(1) from likecomment where uid=#{uid} and cid=#{cid}
+        select COUNT(*) from Like_comment where uid=#{uid} and cid=#{cid}
     </select>
-
+    
     <insert id="insertByUidCid" parameterType="com.lyh.community.entity.LikeComment">
-        INSERT INTO likecomment (uid, cid) VALUES (#{uid}, #{cid})
+        INSERT INTO Like_comment (uid, cid) VALUES (#{uid}, #{cid})
     </insert>
+    
+    <select id="selectCountByCid" resultType="java.lang.Integer">
+        select COUNT(*) from Like_comment where cid=#{cid};
+    </select>
 
 </mapper>
