@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyh.community.dao.ICollectTopicDao">
+	
+	<resultMap type="com.lyh.community.entity.CollectTopic" id="commentRM">
+	</resultMap>
+	<delete id="deleteByUidTid">
+		delete
+		from collect_topic
+		where uid = #{uid}
+			and tid = #{tid};
+	</delete>
+	
+	<select id="selectCountByUidTid" resultType="java.lang.Integer">
+		select COUNT(*)
+		from collect_topic
+		where uid = #{uid}
+			and tid = #{tid};
+	</select>
+	<select id="selectAllByUid" resultType="com.lyh.community.entity.Topic">
+		select module.mname, topic.tname, topic.tcontent, user.uname
+		from module,
+				 topic,
+				 collect_topic,
+				 user
+		where collect_topic.uid = #{uid}
+			and topic.tid = collect_topic.tid
+			and topic.mid = module.mid
+			and user.uid = topic.uid
+	</select>
+	
+	<insert id="insertByUidTid">
+		insert into collect_topic (uid, tid)
+		values (#{uid}, #{tid});
+	</insert>
+
+</mapper>

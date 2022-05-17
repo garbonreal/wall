@@ -58,18 +58,18 @@ public class TopicController {
     }
 
     @RequestMapping(value = "/likeTopic",method = RequestMethod.POST)
-    private Resp<Topic> likeTopic(String email, String password, String tname, String mname){/////////////////////////////////////
-        if(email.length()>40||password.length()>40||tname.length()>40){
+    private Resp<Topic> likeTopic(String email, String password, String ttime, String mname){
+        if(email.length()>40||password.length()>40||ttime.length()>40){
             return Resp.fail("777","参数错误！");
         }
-        return iTopicService.likeTopic(email, password, tname, mname);
+        return iTopicService.likeTopic(email, password, ttime, mname);
     }
-
-    @RequestMapping(value = "/favorite",method = RequestMethod.POST)
-    private Resp<Topic> favorite(String email, String password, String tname, String mname){////////////////////////////////////////
-        if(email.length()>40||password.length()>40||tname.length()>40){
+    
+    @RequestMapping(value="/collectTopic",method=RequestMethod.POST)
+    private Resp<Topic> collectTopic(String email,String password, String ttime, String mname){
+        if(email.length()>40||password.length()>40||ttime.length()>40){
             return Resp.fail("777","参数错误！");
         }
-        return iTopicService.favorite(email, password, tname, mname);
+        return iTopicService.collectTopic(email, password, ttime, mname);
     }
 }

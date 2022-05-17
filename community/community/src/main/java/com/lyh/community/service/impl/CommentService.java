@@ -41,7 +41,7 @@ public class CommentService implements ICommentService {
 //            if(maxnum!=null){
 //                M = Integer.parseInt(maxnum)+1;
 //            }
-            iCommentDao.insertByContentUidTidNum(content,iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),ccanonymous,ctime);
+            iCommentDao.insertByContentUidTidNum(content,iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)),ccanonymous,ctime);
             return Resp.success(null);
         }
     }
@@ -51,7 +51,7 @@ public class CommentService implements ICommentService {
         if(iUserDao.selectCountByEmailPassword(email,DigestUtils.md5DigestAsHex(password.getBytes()))==0){
             return Resp.fail("499","身份验证错误！");
         }
-        else if(iCommentDao.selectCountByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),ctime)==0){
+        else if(iCommentDao.selectCountByTidCtime(iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)),ctime)==0){
             return Resp.fail("431","评论不存在！");
         }
         // 不再区分 uid
@@ -59,7 +59,7 @@ public class CommentService implements ICommentService {
 //            return Resp.fail("488","用户无权限！");
 //        }
         else{
-            iCommentDao.deleteByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),ctime);
+            iCommentDao.deleteByTidCtime(iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)),ctime);
             return Resp.success(null);
         }
     }
@@ -70,7 +70,7 @@ public class CommentService implements ICommentService {
             return Resp.fail("421","话题不存在！");
         }
         else{
-            int tid = iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname));
+            int tid = iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname));
             PageHelper.startPage(pageNum,pageSize);
             List<Comment> CommentList = iCommentDao.selectAllByTid(tid);
             for (Comment comment : CommentList) {
@@ -92,11 +92,11 @@ public class CommentService implements ICommentService {
 //        else if(iCommentDao.selectCountByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),num)==0){
 //            return Resp.fail("431","评论不存在！");
 //        }
-        else if(iLikeCommentDao.selectCountByUidCid(iUserDao.selectUidByEmail(email),iCommentDao.selectCidByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),ctime))==1){
+        else if(iLikeCommentDao.selectCountByUidCid(iUserDao.selectUidByEmail(email),iCommentDao.selectCidByTidCtime(iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)),ctime))==1){
             return Resp.fail("432","已经赞过！");
         }
         else{
-            int cid=iCommentDao.selectCidByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),ctime);
+            int cid=iCommentDao.selectCidByTidCtime(iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)),ctime);
             iLikeCommentDao.insertByUidCid(iUserDao.selectUidByEmail(email),cid);
             // iCommentDao.updateAddLikeByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),ctime);
             return Resp.success(null);

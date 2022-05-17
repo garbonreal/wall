@@ -6,7 +6,7 @@
 
     <resultMap type="com.lyh.community.entity.Topic" id="TopicRM">
     </resultMap>
-
+    
     <select id="selectCountByTtimeMid" resultType="int" parameterType="com.lyh.community.entity.Topic">
         select COUNT(1) from topic where ttime=#{ttime} and mid=#{mid}
     </select>
@@ -36,7 +36,7 @@
     </select>
     
 
-    <select id="selectTidByTnameMid" resultType="int" parameterType="com.lyh.community.entity.Topic">
+    <select id="selectTidByTtimeMid" resultType="int" parameterType="com.lyh.community.entity.Topic">
         select tid from topic where ttime=#{ttime} and mid=#{mid}
     </select>
 

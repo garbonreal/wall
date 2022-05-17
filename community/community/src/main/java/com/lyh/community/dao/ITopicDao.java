@@ -20,10 +20,8 @@ public interface ITopicDao {
     List<Topic> selectAllByMid(@Param("mid") int mid);
 
     List<Topic> selectAll();
-
-    void updateAddLikeByTnameMid(@Param("tname") String tname, @Param("mid") int mid);
-
-    int selectTidByTnameMid(@Param("ttime") String ttime, @Param("mid") int mid);
+    
+    int selectTidByTtimeMid(@Param("ttime") String ttime, @Param("mid") int mid);
 
     void insertByTnameIntroMidUid(String intro, int tanonymous, @Param("ttime") String ttime, @Param("mid") int selectMidByMname, @Param("uid") int selectUidByEmail);
 }

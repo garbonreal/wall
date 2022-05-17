@@ -8,7 +8,7 @@
     </resultMap>
 
     <select id="selectCountByUidTid" resultType="int" parameterType="com.lyh.community.entity.LikeTopic">
-        select COUNT(1) from like_topic where uid=#{uid} and tid=#{tid}
+        select COUNT(*) from like_topic where uid=#{uid} and tid=#{tid}
     </select>
 
     <insert id="insertByUidTid" parameterType="com.lyh.community.entity.LikeTopic">

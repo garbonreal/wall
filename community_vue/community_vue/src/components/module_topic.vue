@@ -94,7 +94,7 @@
           const params = new URLSearchParams();
           params.append('email', _this.Varall._email);
           params.append('password', _this.Varall._password);
-          params.append('tname',num.tname);
+          params.append('ttime',num.ttime);
           params.append('mname',_this.Varall._currentmname);
           this.$axios.post('http://localhost:8080/topic/likeTopic',params).then(function (resp) {
             console.log(resp)
@@ -120,9 +120,9 @@
           const params = new URLSearchParams();
           params.append('email', _this.Varall._email);
           params.append('password', _this.Varall._password);
-          params.append('tname',num.tname);
+          params.append('ttime',num.ttime);
           params.append('mname',_this.Varall._currentmname);
-          this.$axios.post('http://localhost:8080/topic/favorite',params).then(function (resp) {
+          this.$axios.post('http://localhost:8080/topic/collectTopic',params).then(function (resp) {
             console.log(resp)
             if(resp.data.code=="499"){
               alert("收藏失败：身份验证错误！原因可能是密码错误或邮箱输入错误")

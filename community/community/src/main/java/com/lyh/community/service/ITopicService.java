@@ -13,16 +13,16 @@ import java.util.List;
 
 public interface ITopicService {
     Resp<Topic> createTopic(String intro, String email, String password, int tanonymous, String ttime, String mname);
-
+    
     Resp<Topic> deleteTopic(String ttime, String email, String password, String mname);
-
+    
     Resp<PageInfo<Topic>> showTopicByUid(String email, String password, int pageNum, int pageSize);
-
+    
     Resp<PageInfo<Topic>> showFavoriteByUid(String email, String password, int pageNum, int pageSize);
-
+    
     Resp<PageInfo<Topic>> showTopicByModule(String mname, int pageNum, int pageSize);//如果是NULL返回全部topic
-
-    Resp<Topic> likeTopic(String email, String password, String tname, String mname);//需要检验数据库liketopic表
-
-    Resp<Topic> favorite(String email, String password, String tname, String mname);//收藏
+    
+    Resp<Topic> likeTopic(String email, String password, String ttime, String mname);//需要检验数据库liketopic表
+    
+    Resp<Topic> collectTopic(String email, String password, String ttime, String mname);
 }

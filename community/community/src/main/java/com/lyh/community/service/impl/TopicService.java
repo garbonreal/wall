@@ -26,6 +26,8 @@ public class TopicService implements ITopicService {
     private ILikeTopicDao iLikeTopicDao;
     @Autowired
     private IFavoriteDao iFavoriteDao;
+    @Autowired
+    private ICollectTopicDao iCollectTopicDao;
 
     @Override
     public Resp<Topic> createTopic(String intro, String email, String password, int tanonymous, String ttime, String mname) {
@@ -77,7 +79,13 @@ public class TopicService implements ITopicService {
         else{
             int uid = iUserDao.selectUidByEmail(email);
             PageHelper.startPage(pageNum,pageSize);
-            PageInfo<Topic> pageInfo = new PageInfo<Topic>(iFavoriteDao.selectAllByUid(uid));
+            List<Topic> favoriteTopic=iCollectTopicDao.selectAllByUid(uid);
+            System.out.println("uid="+uid);
+            for(Topic t:favoriteTopic){
+                System.out.println(t.getMname()+";"+t.getTname()+";"+t.getTcontent()+";"+t.getUname());
+                if(t.getTanonymous()==0) t.setUname("匿名");
+            }
+            PageInfo<Topic> pageInfo = new PageInfo<Topic>(favoriteTopic);
             return Resp.success(pageInfo);
         }
     }
@@ -110,36 +118,37 @@ public class TopicService implements ITopicService {
     }
 
     @Override
-    public Resp<Topic> likeTopic(String email, String password, String tname, String mname) {
+    public Resp<Topic> likeTopic(String email, String password, String ttime, String mname) {
         if(iUserDao.selectCountByEmailPassword(email,DigestUtils.md5DigestAsHex(password.getBytes()))==0){
             return Resp.fail("499","身份验证错误！");
         }
-        else if(iTopicDao.selectCountByTtimeMid(tname,iModuleDao.selectMidByMname(mname))==0){
+        else if(iTopicDao.selectCountByTtimeMid(ttime,iModuleDao.selectMidByMname(mname))==0){
             return Resp.fail("421","话题不存在！");
         }
-        else if(iLikeTopicDao.selectCountByUidTid(iUserDao.selectUidByEmail(email),iTopicDao.selectTidByTnameMid(tname,iModuleDao.selectMidByMname(mname)))==1){
+        else if(iLikeTopicDao.selectCountByUidTid(iUserDao.selectUidByEmail(email),iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)))==1){
             return Resp.fail("422","已赞！");
         }
         else{
-            iLikeTopicDao.insertByUidTid(iUserDao.selectUidByEmail(email),iTopicDao.selectTidByTnameMid(tname,iModuleDao.selectMidByMname(mname)));
-            iTopicDao.updateAddLikeByTnameMid(tname,iModuleDao.selectMidByMname(mname));
+            iLikeTopicDao.insertByUidTid(iUserDao.selectUidByEmail(email),iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)));
+            // iTopicDao.updateAddLikeByTtimeMid(ttime,iModuleDao.selectMidByMname(mname));
             return Resp.success(null);
         }
     }
-
+    
     @Override
-    public Resp<Topic> favorite(String email, String password, String tname, String mname) {
+    public Resp<Topic> collectTopic(String email, String password, String ttime, String mname) {
         if(iUserDao.selectCountByEmailPassword(email,DigestUtils.md5DigestAsHex(password.getBytes()))==0){
             return Resp.fail("499","身份验证错误！");
         }
-        else if(iTopicDao.selectCountByTtimeMid(tname,iModuleDao.selectMidByMname(mname))==0){
+        else if(iTopicDao.selectCountByTtimeMid(ttime,iModuleDao.selectMidByMname(mname))==0){
             return Resp.fail("421","话题不存在！");
         }
-        else if(iFavoriteDao.selectCountByUidTid(iUserDao.selectUidByEmail(email),iTopicDao.selectTidByTnameMid(tname,iModuleDao.selectMidByMname(mname)))==1){
+        else if(iCollectTopicDao.selectCountByUidTid(iUserDao.selectUidByEmail(email),iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)))==1){
+            // System.out.println("uid="+iUserDao.selectUidByEmail(email)+" tid="+iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)));
             return Resp.fail("423","已收藏！");
         }
         else{
-            iFavoriteDao.insertByUidTid(iUserDao.selectUidByEmail(email),iTopicDao.selectTidByTnameMid(tname,iModuleDao.selectMidByMname(mname)));
+            iCollectTopicDao.insertByUidTid(iUserDao.selectUidByEmail(email),iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)));
             return Resp.success(null);
         }
     }

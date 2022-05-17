@@ -18,7 +18,7 @@
         width="150">
       </el-table-column>
       <el-table-column
-        prop="intro"
+        prop="tcontent"
         label="简介"
         width="870">
       </el-table-column>
