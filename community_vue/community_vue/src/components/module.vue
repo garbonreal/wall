@@ -1,6 +1,6 @@
 <template>
   <div style="width: 100%">
-    <el-button type="primary" style="float: right" icon="el-icon-circle-plus" @click="create_module()">添加板块</el-button>
+<!--    <el-button type="primary" style="float: right" icon="el-icon-circle-plus" @click="create_module()">添加板块</el-button>-->
     <el-table
       :data="tableData"
       border
@@ -27,7 +27,7 @@
           <template slot-scope="scope">
             <el-button v-on:click="moreinfro(scope.row)" type="text" size="small">查看</el-button>
   <!--          <el-button @click="favorite(scope.row)" type="text" size="small">收藏</el-button>-->
-            <el-button @click="deletemodule(scope.row)" type="text" size="small">删除</el-button>
+<!--            <el-button @click="deletemodule(scope.row)" type="text" size="small">删除</el-button>-->
 
           </template>
         </el-table-column>

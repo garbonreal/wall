@@ -7,22 +7,24 @@
         :data="tableData"
         border
         style="width: 100%;">
-        <el-table-column
-          prop="num"
-          label="楼层数"
-          width="80">
-        </el-table-column>
+<!--        <el-table-column-->
+<!--          prop="num"-->
+<!--          label="楼层数"-->
+<!--          width="80">-->
+<!--        </el-table-column>-->
 
-        <el-table-column
-          prop="content"
-          label="评论内容"
-          width="850">
-        </el-table-column>
         <el-table-column
           prop="ctime"
           label="评论时间"
           width="180">
         </el-table-column>
+
+        <el-table-column
+          prop="ccontent"
+          label="评论内容"
+          width="850">
+        </el-table-column>
+
 <!--        <el-table-column-->
 <!--          prop="clike"-->
 <!--          label="点赞数"-->
@@ -68,11 +70,11 @@
       name: "topic_comment",
       methods:{
         page(currentPage){
-          // alert(currentPage)
+          alert(currentPage)
           const _this=this;
-          let tname = _this.$route.query.tname;
-          this.$axios.post('http://localhost:8080/comment/showCommentByTopic?tname='+tname+'&pageNum='+currentPage+'&pageSize=5'+'&mname='+_this.Varall._currentmname).then(function (resp) {
-            // console.log(resp)
+          let ttime = _this.$route.query.ttime;
+          this.$axios.post('http://localhost:8080/comment/showCommentByTopic?ttime='+ttime+'&pageNum='+currentPage+'&pageSize=5'+'&mname='+_this.Varall._currentmname).then(function (resp) {
+            console.log(resp)
             _this.tableData=resp.data.body.list
             _this.total=resp.data.body.total
           })
@@ -93,10 +95,10 @@
             const params = new URLSearchParams();
             params.append('email', _this.Varall._email);
             params.append('password', _this.Varall._password);
-            let tname = this.$route.query.tname;
-            params.append('tname',tname);
-            params.append('num',num.num);
+            let ttime = this.$route.query.ttime;
+            params.append('ttime',ttime);
             params.append('mname',_this.Varall._currentmname);
+            params.append('ctime',num.ctime);
             // alert(num.num)
             // alert(tname)
             this.$axios.post('http://localhost:8080/comment/deleteComment',params).then(function (resp) {
@@ -152,14 +154,14 @@
           // alert(mname);
           this.$router.push({
             path:"/createcomment",query:{
-              tname:this.$route.query.tname
+              ttime:this.$route.query.ttime
             }
           })
         }
       },created(){
         const _this=this;
-        let tname = this.$route.query.tname;
-        this.$axios.post('http://localhost:8080/comment/showCommentByTopic?tname='+tname+'&pageNum=1&pageSize=5'+'&mname='+_this.Varall._currentmname).then(function (resp) {
+        let ttime = this.$route.query.ttime;
+        this.$axios.post('http://localhost:8080/comment/showCommentByTopic?ttime='+ttime+'&pageNum=1&pageSize=5'+'&mname='+_this.Varall._currentmname).then(function (resp) {
           console.log(resp)
           _this.tableData=resp.data.body.list;
           _this.total=resp.data.body.total;

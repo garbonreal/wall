@@ -8,19 +8,19 @@ import java.util.List;
 
 @Repository
 public interface ICommentDao {
-    void insertByContentUidTidNum(@Param("content") String content, @Param("uid") int uid, @Param("tid") int tid, @Param("num") int num);
+    void insertByContentUidTidNum(@Param("content") String content, @Param("tid") int tid, @Param("canonymous") int canonymous, @Param("ctime") String ctime);
 
     String selectMaxNumByTid(@Param("tid") int tid);
 
-    void deleteByTidNum(@Param("tid") int tid, @Param("num") int num);
+    void deleteByTidCtime(@Param("tid") int tid, @Param("ctime") String ctime);
 
-    int selectUidByTidNum(@Param("tid") int tid, @Param("num") int num);
+//    int selectUidByTidCtime(@Param("tid") int tid, @Param("ctime") int ctime);
 
-    List<Comment> selectAllByTidOrderByNum(@Param("tid") int tid);
+    List<Comment> selectAllByTid(@Param("tid") int tid);
 
     void updateAddLikeByTidNum(@Param("tid") int tid, @Param("num") int num);
 
     int selectCidByTidNum(@Param("tid") int tid, @Param("num") int num);
 
-    int selectCountByTidNum(@Param("tid") int tid, @Param("num") int num);
+    int selectCountByTidCtime(@Param("tid") int tid, @Param("ctime") String ctime);
 }

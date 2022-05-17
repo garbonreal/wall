@@ -17,21 +17,20 @@ public class TopicController {
     @Autowired
     private ITopicService iTopicService;
 
-
     @RequestMapping(value = "/createTopic",method = RequestMethod.POST)
-    private Resp<Topic> createTopic(String intro, String email, String password, int tanonymous, String date, String mname){
+    private Resp<Topic> createTopic(String intro, String email, String password, int tanonymous, String ttime, String mname){
         if(email.length()>40||password.length()>40||intro.length()>100||mname.length()>40){
             return Resp.fail("777","参数错误！");
         }
-        return iTopicService.createTopic(intro, email, password, tanonymous, date, mname);
+        return iTopicService.createTopic(intro, email, password, tanonymous, ttime, mname);
     }
 
     @RequestMapping(value = "/deleteTopic",method = RequestMethod.POST)
-    private Resp<Topic> deleteTopic(String tname, String email, String password, String mname){//////////////////////////////////////////
-        if(email.length()>40||password.length()>40||tname.length()>40){
+    private Resp<Topic> deleteTopic(String ttime, String email, String password, String mname){//////////////////////////////////////////
+        if(email.length()>40||password.length()>40||ttime.length()>20){
             return Resp.fail("777","参数错误！");
         }
-        return iTopicService.deleteTopic(tname, email, password, mname);
+        return iTopicService.deleteTopic(ttime, email, password, mname);
     }
 
     @RequestMapping(value = "/showTopicByUid",method = RequestMethod.POST)

@@ -31,7 +31,8 @@
           password:'',
           mname:'',
           intro:'',
-          tanonymous:''
+          tanonymous:'',
+          ttime:''
         },
         rules: {
           intro: [
@@ -50,13 +51,13 @@
           let hh = new Date().getHours();
           let mf = new Date().getMinutes()<10 ? '0'+new Date().getMinutes() : new Date().getMinutes();
           let ss = new Date().getSeconds()<10 ? '0'+new Date().getSeconds() : new Date().getSeconds();
-          gettime = yy+'-'+mm+'-'+dd+' '+hh+':'+mf+':'+ss;
+          gettime = yy+'-'+mm+'-'+ dd +' '+hh+':'+mf+':'+ss;
           return gettime
         },
       submitForm(formName) {
         const _this=this;
         let mname=this.$route.query.mname;
-        let ttime=this.getdate();
+        _this.ruleForm.ttime = this.getdate();
         this.$refs[formName].validate((valid) => {
           if (valid) {
             // alert('submit!');
@@ -70,7 +71,7 @@
             params.append('email', _this.Varall._email);
             params.append('password', _this.Varall._password);
             params.append('tanonymous', _this.ruleForm.tanonymous);
-            params.append('ttime', ttime);
+            params.append('ttime', _this.ruleForm.ttime);
             params.append('mname', mname);
 
             alert(params)

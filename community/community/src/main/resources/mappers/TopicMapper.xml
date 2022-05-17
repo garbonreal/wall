@@ -7,20 +7,20 @@
     <resultMap type="com.lyh.community.entity.Topic" id="TopicRM">
     </resultMap>
 
-    <select id="selectCountByTnameMid" resultType="int" parameterType="com.lyh.community.entity.Topic">
-        select COUNT(1) from topic where tname=#{tname} and mid=#{mid}
+    <select id="selectCountByTtimeMid" resultType="int" parameterType="com.lyh.community.entity.Topic">
+        select COUNT(1) from topic where ttime=#{ttime} and mid=#{mid}
     </select>
 
     <insert id="insertByTnameIntroMidUid" parameterType="com.lyh.community.entity.Topic">
-        INSERT INTO topic (tcontent, tanonymous, ttime, mid, uid) VALUES (#{intro}, #{tanonymous}, #{date}, #{mid}, #{uid})
+        INSERT INTO topic (tcontent, tanonymous, ttime, mid, uid) VALUES (#{intro}, #{tanonymous}, #{ttime}, #{mid}, #{uid})
     </insert>
 
-    <delete id="deleteByTnameMid" parameterType="com.lyh.community.entity.Topic">
-    	delete from topic where tname = #{tname} and mid=#{mid}
+    <delete id="deleteByTtimeMid" parameterType="com.lyh.community.entity.Topic">
+    	delete from topic where ttime = #{ttime} and mid=#{mid}
   	</delete>
 
-    <select id="selectUidByTnameMid" resultType="int" parameterType="com.lyh.community.entity.Topic">
-        select uid from topic where tname=#{tname} and mid=#{mid}
+    <select id="selectUidByTtimeMid" resultType="int" parameterType="com.lyh.community.entity.Topic">
+        select uid from topic where ttime=#{ttime} and mid=#{mid}
     </select>
 
     <select id="selectAllByUid" resultType="com.lyh.community.entity.Topic" parameterType="com.lyh.community.entity.Topic">
@@ -28,7 +28,7 @@
     </select>
 
     <select id="selectAllByMid" resultType="com.lyh.community.entity.Topic" parameterType="com.lyh.community.entity.Topic">
-        select user.uname,topic.* from topic,user where mid=#{mid} and topic.uid = user.uid
+        select user.uname, topic.ttime, topic.tcontent, topic.tanonymous from topic,user where mid=#{mid} and topic.uid = user.uid
     </select>
 
     <select id="selectAll" resultType="com.lyh.community.entity.Topic" parameterType="com.lyh.community.entity.Topic">
@@ -40,7 +40,7 @@
     </update>
 
     <select id="selectTidByTnameMid" resultType="int" parameterType="com.lyh.community.entity.Topic">
-        select tid from topic where tname=#{tname} and mid=#{mid}
+        select tid from topic where ttime=#{ttime} and mid=#{mid}
     </select>
 
 </mapper>

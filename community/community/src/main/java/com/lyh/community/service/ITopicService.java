@@ -12,9 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 public interface ITopicService {
-    Resp<Topic> createTopic(String intro, String email, String password, int tanonymous, String date, String mname);
+    Resp<Topic> createTopic(String intro, String email, String password, int tanonymous, String ttime, String mname);
 
-    Resp<Topic> deleteTopic(String tname, String email, String password, String mname);
+    Resp<Topic> deleteTopic(String ttime, String email, String password, String mname);
 
     Resp<PageInfo<Topic>> showTopicByUid(String email, String password, int pageNum, int pageSize);
 
