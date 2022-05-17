@@ -15,6 +15,6 @@ public interface ICommentService {
     Resp<Comment> deleteComment(String email, String password, String ttime, String mname, String ctime);
 
     Resp<PageInfo<Comment>> showCommentByTopic(String ttime, int pageNum, int pageSize, String mname);
-
-    Resp<Comment> likeComment(String email, String password, String tname, int num, String mname);//需要验证likeComment表
+    
+    Resp<Comment> likeComment(String email, String password, String ttime, String ctime, String mname);
 }

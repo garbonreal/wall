@@ -1,35 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lyh.community.dao.ICommentDao">
-
-    <resultMap type="com.lyh.community.entity.Comment" id="CommentRM">
-    </resultMap>
-
-    <insert id="insertByContentUidTidNum" parameterType="com.lyh.community.entity.Comment">
-        INSERT INTO Comment (ccontent, tid, canonymous, ctime) VALUES (#{content}, #{tid}, #{canonymous}, #{ctime})
-    </insert>
-
-    <delete id="deleteByTidCtime" parameterType="com.lyh.community.entity.Comment">
-    	delete from Comment where tid = #{tid} and ctime = #{ctime}
-  	</delete>
-
-<!--    <select id="selectUidByTidNum" resultType="int" parameterType="com.lyh.community.entity.Comment">-->
-<!--        select uid from comment where tid = #{tid} and num = #{num}-->
-<!--    </select>-->
-
-    <select id="selectAllByTid" resultType="com.lyh.community.entity.Comment" parameterType="com.lyh.community.entity.Comment">
-        select User.uname,Comment.* from Comment,User where tid = #{tid}
-    </select>
-
-    <update id="updateAddLikeByTidNum" parameterType="com.lyh.community.entity.Comment">
-        UPDATE Comment SET clike = clike+1 WHERE tid = #{tid} and num = #{num}
-    </update>
-    
-
-    <select id="selectCountByTidCtime" resultType="int" parameterType="com.lyh.community.entity.Comment">
-        select count(1) from Comment where tid = #{tid} and ctime = #{ctime}
-    </select>
-
+	
+	<resultMap type="com.lyh.community.entity.Comment" id="CommentRM">
+	</resultMap>
+	
+	<insert id="insertByContentUidTidNum" parameterType="com.lyh.community.entity.Comment">
+		INSERT INTO Comment (ccontent, tid, canonymous, ctime)
+		VALUES (#{content}, #{tid}, #{canonymous}, #{ctime})
+	</insert>
+	
+	<delete id="deleteByTidCtime" parameterType="com.lyh.community.entity.Comment">
+		delete
+		from Comment
+		where tid = #{tid}
+			and ctime = #{ctime}
+	</delete>
+	
+	<!--    <select id="selectUidByTidNum" resultType="int" parameterType="com.lyh.community.entity.Comment">-->
+	<!--        select uid from comment where tid = #{tid} and num = #{num}-->
+	<!--    </select>-->
+	
+	<select id="selectAllByTid" resultType="com.lyh.community.entity.Comment"
+					parameterType="com.lyh.community.entity.Comment">
+		select User.uname, Comment.*
+		from Comment,
+				 User
+		where tid = #{tid}
+	</select>
+	
+	<select id="selectCountByTidCtime" resultType="int" parameterType="com.lyh.community.entity.Comment">
+		select count(1)
+		from Comment
+		where tid = #{tid}
+			and ctime = #{ctime}
+	</select>
+	
+	<select id="selectCidByTidCtime" resultType="java.lang.Integer">
+		select cid
+		from Comment
+		where tid = #{tid}
+			and ctime = #{ctime};
+	</select>
+	
 </mapper>

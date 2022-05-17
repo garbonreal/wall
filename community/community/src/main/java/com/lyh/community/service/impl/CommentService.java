@@ -55,7 +55,7 @@ public class CommentService implements ICommentService {
             return Resp.fail("431","评论不存在！");
         }
         // 不再区分 uid
-//        else if(iCommentDao.selectUidByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),ctime)!=iUserDao.selectUidByEmail(email)&&iTopicDao.selectUidByTtimeMid(tname,iModuleDao.selectMidByMname(mname))!=iUserDao.selectUidByEmail(email)){
+//        else if(iCommentDao.selectUidByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),ctime)!=iUserDao.selectUidByEmail(email)&&iTopicDao.selectUidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname))!=iUserDao.selectUidByEmail(email)){
 //            return Resp.fail("488","用户无权限！");
 //        }
         else{
@@ -85,19 +85,20 @@ public class CommentService implements ICommentService {
     }
 
     @Override
-    public Resp<Comment> likeComment(String email, String password, String tname, int num, String mname) {
+    public Resp<Comment> likeComment(String email, String password, String ttime,String ctime, String mname) {
         if(iUserDao.selectCountByEmailPassword(email,DigestUtils.md5DigestAsHex(password.getBytes()))==0){
             return Resp.fail("499","身份验证错误！");
         }
-//        else if(iCommentDao.selectCountByTidCtime(iTopicDao.selectTidByTnameMid(tname,iModuleDao.selectMidByMname(mname)),num)==0){
+//        else if(iCommentDao.selectCountByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),num)==0){
 //            return Resp.fail("431","评论不存在！");
 //        }
-        else if(iLikeCommentDao.selectCountByUidCid(iUserDao.selectUidByEmail(email),iCommentDao.selectCidByTidNum(iTopicDao.selectTidByTnameMid(tname,iModuleDao.selectMidByMname(mname)),num))==1){
-            return Resp.fail("432","已赞！");
+        else if(iLikeCommentDao.selectCountByUidCid(iUserDao.selectUidByEmail(email),iCommentDao.selectCidByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),ctime))==1){
+            return Resp.fail("432","已经赞过！");
         }
         else{
-            iLikeCommentDao.insertByUidCid(iUserDao.selectUidByEmail(email),iCommentDao.selectCidByTidNum(iTopicDao.selectTidByTnameMid(tname,iModuleDao.selectMidByMname(mname)),num));
-            iCommentDao.updateAddLikeByTidNum(iTopicDao.selectTidByTnameMid(tname,iModuleDao.selectMidByMname(mname)),num);
+            int cid=iCommentDao.selectCidByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),ctime);
+            iLikeCommentDao.insertByUidCid(iUserDao.selectUidByEmail(email),cid);
+            // iCommentDao.updateAddLikeByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),ctime);
             return Resp.success(null);
         }
     }

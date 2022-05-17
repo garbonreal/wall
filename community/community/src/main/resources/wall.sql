@@ -13,7 +13,7 @@ CREATE TABLE `Collect_topic`  (
 
 CREATE TABLE `Comment`  (
   `cid` INT(4) NOT NULL AUTO_INCREMENT,
-  `ctime` DATETIME(6) NULL DEFAULT NULL,
+  `ctime` VARCHAR(40),
   `canonymous` TINYINT(1) NULL DEFAULT NULL,
   `ccontent` VARCHAR(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `tid` INT(4) UNSIGNED ZEROFILL NULL DEFAULT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE `Submit_topic`  (
 CREATE TABLE `Topic`  (
   `tid` INT(4) NOT NULL AUTO_INCREMENT,
   `uid` INT(4) UNSIGNED ZEROFILL NOT NULL,
-  `ttime` DATETIME(6) NULL DEFAULT NULL,
+  `ttime` VARCHAR(40),
   `tanonymous` TINYINT(1) NULL DEFAULT NULL,
   `tcontent` VARCHAR(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `mid` INT(4) UNSIGNED ZEROFILL NULL DEFAULT NULL,
@@ -84,3 +84,4 @@ INSERT INTO `Module` VALUES(2,'捞人区','提供快速找人服务，无论他�
 
 SELECT * FROM `user`;
 
+SELECT * FROM `comment`;

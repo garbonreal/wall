@@ -15,9 +15,8 @@ public interface ICommentDao {
 //    int selectUidByTidCtime(@Param("tid") int tid, @Param("ctime") int ctime);
 
     List<Comment> selectAllByTid(@Param("tid") int tid);
-
-    void updateAddLikeByTidNum(@Param("tid") int tid, @Param("num") int num);
     
-
     int selectCountByTidCtime(@Param("tid") int tid, @Param("ctime") String ctime);
+    
+    int selectCidByTidCtime(@Param("tid")int tid, @Param("ctime")String ctime);
 }
