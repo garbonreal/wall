@@ -47,8 +47,8 @@ public class CommentController {
     
     //点赞评论
     @RequestMapping(value = "/likeComment", method = RequestMethod.POST)
-    private Resp<Comment> likeComment(String email, String password, String ttime,String ctime, String mname) {
-        if (email.length() > 40 || password.length() > 40) {
+    private Resp<Comment> likeComment(String email, String password, String ttime, String ctime, String mname) {
+        if (email.length() > 40 || password.length() > 40 || ttime.length() > 40 || ctime.length() > 40 || mname.length() > 20) {
             return Resp.fail("777", "参数错误！");
         }
         return iCommentService.likeComment(email, password, ttime, ctime, mname);

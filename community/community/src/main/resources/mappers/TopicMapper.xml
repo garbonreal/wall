@@ -34,10 +34,7 @@
     <select id="selectAll" resultType="com.lyh.community.entity.Topic" parameterType="com.lyh.community.entity.Topic">
         select user.uname, topic.ttime, topic.tcontent, topic.tanonymous from topic,user where topic.uid = user.uid
     </select>
-
-    <update id="updateAddLikeByTnameMid" parameterType="com.lyh.community.entity.Topic">
-        UPDATE topic SET clike = clike+1 WHERE tname = #{tname} and mid=#{mid}
-    </update>
+    
 
     <select id="selectTidByTnameMid" resultType="int" parameterType="com.lyh.community.entity.Topic">
         select tid from topic where ttime=#{ttime} and mid=#{mid}

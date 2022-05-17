@@ -123,14 +123,15 @@
         likecomment(num){
           // alert("点赞？")
           const _this=this;
+          let ttime = this.$route.query.ttime;
           if(_this.Varall._isLogin){
             // alert("已经登录")
             const params = new URLSearchParams();
             params.append('email', _this.Varall._email);
             params.append('password', _this.Varall._password);
             let tname = this.$route.query.tname;
-            params.append('tname',tname);
-            params.append('num',num.num);
+            params.append('ttime',ttime);
+            params.append('ctime',num.ctime);
             params.append('mname',_this.Varall._currentmname);
             this.$axios.post('http://localhost:8080/comment/likeComment',params).then(function (resp) {
               console.log(resp)

@@ -8,37 +8,37 @@
     </resultMap>
 
     <select id="selectCountByMname" resultType="int" parameterType="com.lyh.community.entity.Module">
-        select COUNT(1) from Module where mname=#{mname}
+        select COUNT(1) from module where mname=#{mname}
     </select>
 
     <insert id="insertByMnameIntroUid" parameterType="com.lyh.community.entity.Module">
-        INSERT INTO Module (mname, intro, uid) VALUES (#{mname}, #{intro}, #{uid})
+        INSERT INTO module (mname, intro, uid) VALUES (#{mname}, #{intro}, #{uid})
     </insert>
 
     <delete id="deleteByMname" parameterType="com.lyh.community.entity.Module">
-    	delete from Module where mname = #{mname}
+    	delete from module where mname = #{mname}
   	</delete>
 
     <select id="selectUidByMname" resultType="int" parameterType="com.lyh.community.entity.Module">
-        select uid from Module where mname=#{mname}
+        select uid from module where mname=#{mname}
     </select>
 
     <select id="selectMidByMname" resultType="int" parameterType="com.lyh.community.entity.Module">
-        select mid from Module where mname=#{mname}
+        select mid from module where mname=#{mname}
     </select>
 
     <select id="selectUidByMid" resultType="int" parameterType="com.lyh.community.entity.Module">
-        select uid from Module where mid=#{mid}
+        select uid from module where mid=#{mid}
     </select>
 
 
 <!-- 已确定可以用的部分 -->
     <select id="selectAllByUid" resultType="com.lyh.community.entity.Module" parameterType="com.lyh.community.entity.Module">
-        select * from Module where uid=#{uid}
+        select * from module where uid=#{uid}
     </select>
 
     <select id="selectAll" resultType="com.lyh.community.entity.Module" parameterType="com.lyh.community.entity.Module">
-        select * from Module
+        select * from module
     </select>
 
 </mapper>

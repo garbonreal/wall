@@ -85,7 +85,6 @@
         this.$router.push({
           path: "/topic_comment", query: {
             ttime: num.ttime
-            ctime:
           }
         })
       },tlike(num){
