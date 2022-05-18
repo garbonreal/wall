@@ -74,8 +74,6 @@
             params.append('ttime', _this.ruleForm.ttime);
             params.append('mname', mname);
 
-            alert(params)
-
             this.$axios.post('http://localhost:8080/topic/createTopic',params).then(function (resp) {
               console.log(resp)
               if(resp.data.code=="499"){

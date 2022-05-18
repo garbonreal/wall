@@ -8,8 +8,8 @@
 	</resultMap>
 	
 	<insert id="insertByContentUidTidNum" parameterType="com.lyh.community.entity.Comment">
-		INSERT INTO comment (ccontent, tid, canonymous, ctime)
-		VALUES (#{content}, #{tid}, #{canonymous}, #{ctime})
+		INSERT INTO comment (ccontent, tid, canonymous, ctime, uid)
+		VALUES (#{content}, #{tid}, #{canonymous}, #{ctime}, #{uid})
 	</insert>
 	
 	<delete id="deleteByTidCtime" parameterType="com.lyh.community.entity.Comment">
@@ -19,9 +19,9 @@
 			and ctime = #{ctime}
 	</delete>
 	
-	<!--    <select id="selectUidByTidNum" resultType="int" parameterType="com.lyh.community.entity.comment">-->
-	<!--        select uid from comment where tid = #{tid} and num = #{num}-->
-	<!--    </select>-->
+	<select id="selectUidByTidCtime" resultType="java.lang.Integer" parameterType="com.lyh.community.entity.Comment">
+	    select uid from comment where tid = #{tid} and ctime = #{ctime}
+	</select>
 	
 	<select id="selectAllByTid" resultType="com.lyh.community.entity.Comment"
 					parameterType="com.lyh.community.entity.Comment">

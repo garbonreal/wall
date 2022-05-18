@@ -33,6 +33,14 @@ public class TopicController {
         return iTopicService.deleteTopic(ttime, email, password, mname);
     }
 
+    @RequestMapping(value = "/deleteFavoriteTopic",method = RequestMethod.POST)
+    private Resp<Topic> deleteFavoriteTopic(String ttime, String email, String password, String mname){//////////////////////////////////////////
+        if(email.length()>40||password.length()>40||ttime.length()>20){
+            return Resp.fail("777","参数错误！");
+        }
+        return iTopicService.deleteFavoriteTopic(ttime, email, password, mname);
+    }
+
     @RequestMapping(value = "/showTopicByUid",method = RequestMethod.POST)
     private Resp<PageInfo<Topic>> showTopicByUid(String email, String password, int pageNum, int pageSize){
         if(email.length()>40||password.length()>40){

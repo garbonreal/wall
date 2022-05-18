@@ -26,7 +26,7 @@
 			and mid = #{mid}
 	</delete>
 	
-	<select id="selectUidByTtimeMid" resultType="int" parameterType="com.lyh.community.entity.Topic">
+	<select id="selectUidByTtimeMid" resultType="java.lang.Integer" parameterType="com.lyh.community.entity.Topic">
 		select uid
 		from topic
 		where ttime = #{ttime}

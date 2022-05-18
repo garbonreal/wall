@@ -15,7 +15,9 @@ public interface ITopicService {
     Resp<Topic> createTopic(String intro, String email, String password, int tanonymous, String ttime, String mname);
     
     Resp<Topic> deleteTopic(String ttime, String email, String password, String mname);
-    
+
+    public Resp<Topic> deleteFavoriteTopic(String ttime, String email, String password, String mname);
+
     Resp<PageInfo<Topic>> showTopicByUid(String email, String password, int pageNum, int pageSize);
     
     Resp<PageInfo<Topic>> showFavoriteByUid(String email, String password, int pageNum, int pageSize);

@@ -13,6 +13,7 @@
 		where uid = #{uid}
 			and tid = #{tid}
 	</select>
+
 	<select id="selectCountByTid" resultType="java.lang.Integer">
 		select COUNT(*)
 		from like_topic
@@ -23,5 +24,9 @@
 		INSERT INTO like_topic (uid, tid)
 		VALUES (#{uid}, #{tid})
 	</insert>
+
+	<select id="deleteByUidTid" parameterType="com.lyh.community.entity.LikeTopic">
+		delete from like_topic where uid=#{uid} and tid=#{tid}
+	</select>
 
 </mapper>

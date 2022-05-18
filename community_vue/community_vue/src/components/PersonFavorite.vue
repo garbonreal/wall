@@ -8,19 +8,20 @@
       border
       style="width: 100%">
       <el-table-column
+        prop="ttime"
+        label="主题时间"
+        width="180">
+      </el-table-column>
+      <el-table-column
         prop="mname"
         label="主题名"
         width="150">
       </el-table-column>
-      <el-table-column
-        prop="tname"
-        label="话题名"
-        width="150">
-      </el-table-column>
+
       <el-table-column
         prop="tcontent"
         label="简介"
-        width="870">
+        width="500">
       </el-table-column>
 
       <el-table-column
@@ -35,8 +36,8 @@
         width="200">
         <template slot-scope="scope">
           <el-button v-on:click="moreinfro(scope.row)" type="text" size="small">查看</el-button>
-          <el-button @click="tlike(scope.row)" type="text" size="small">点赞</el-button>
-          <el-button @click="favorite(scope.row)" type="text" size="small">收藏</el-button>
+<!--          <el-button @click="tlike(scope.row)" type="text" size="small">点赞</el-button>-->
+<!--          <el-button @click="favorite(scope.row)" type="text" size="small">收藏</el-button>-->
           <el-button v-on:click="deletetopic(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
@@ -141,14 +142,18 @@
       deletetopic(num){
         const _this=this;
         if(_this.Varall._isLogin){
-          if(confirm('确定要删除该话题吗？')==true){
+          if(confirm('确定要删除该话题收藏吗？')==true){
             const params = new URLSearchParams();
             params.append('email', _this.Varall._email);
             params.append('password', _this.Varall._password);
-            params.append('tname',num.tname);
+            params.append('ttime',num.ttime);
             params.append('mname',num.mname);
-            this.$axios.post('http://localhost:8080/topic/deleteTopic',params).then(function (resp) {
+
+            alert(params);
+
+            this.$axios.post('http://localhost:8080/topic/deleteFavoriteTopic',params).then(function (resp) {
               console.log(resp)
+
               if(resp.data.code=="499"){
                 alert("删除话题失败：身份验证错误！原因可能是密码错误或邮箱输入错误")
               }else if(resp.data.code=="488"){

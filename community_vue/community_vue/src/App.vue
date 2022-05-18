@@ -3,7 +3,7 @@
     <el-container>
       <el-header height="100px">
         <router-link to="/">
-          <el-button class="logo-text" style="font-size:1.8em" id="logo">Reup<span style="color:#FF6347;font-size:2.3em;">C</span>ommunity</el-button>
+          <el-button class="logo-text" style="font-size:1.8em" id="logo">Wall<span style="color:#FF6347;font-size:2.3em;">C</span>ommunity</el-button>
         </router-link>
         <span class="row-bg" style="float: right" v-show="!this.Varall._isLogin">
           <router-link to="/register">

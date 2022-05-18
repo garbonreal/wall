@@ -20,7 +20,7 @@
 			and tid = #{tid};
 	</select>
 	<select id="selectAllByUid" resultType="com.lyh.community.entity.Topic">
-		select module.mname, topic.tname, topic.tcontent, user.uname
+		select module.mname, topic.ttime, topic.tcontent, user.uname
 		from module,
 				 topic,
 				 collect_topic,

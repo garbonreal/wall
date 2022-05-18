@@ -32,7 +32,7 @@ export default new Router({
       name: 'category',
       component:Index,
       meta:{
-        title: "ReUp Community"
+        title: "Wall Community"
       },
       redirect: '/module',
       children:[
@@ -73,7 +73,7 @@ export default new Router({
       name: 'register',
       component: Register,
       meta:{
-        title: "ReUp 注册"
+        title: "Wall 注册"
       }
     },
     {
@@ -81,7 +81,7 @@ export default new Router({
       name: 'login',
       component: Login,
       meta:{
-        title: "ReUp 登录"
+        title: "Wall 登录"
       }
     },
     {
@@ -89,7 +89,7 @@ export default new Router({
       name: 'usercon',
       component: Usercon,
       meta:{
-        title: "ReUp 用户界面"
+        title: "Wall 用户界面"
       },
       redirect: '/infoShow',
       children:[

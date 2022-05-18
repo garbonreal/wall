@@ -36,12 +36,8 @@ public class CommentService implements ICommentService {
             return Resp.fail("421","话题不存在！");
         }
         else{
-//            int M = 1;
-//            String maxnum = iCommentDao.selectMaxNumByTid(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)));
-//            if(maxnum!=null){
-//                M = Integer.parseInt(maxnum)+1;
-//            }
-            iCommentDao.insertByContentUidTidNum(content,iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)),ccanonymous,ctime);
+            iCommentDao.insertByContentUidTidNum(content,iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)),ccanonymous,ctime,
+                    iUserDao.selectUidByEmail(email));
             return Resp.success(null);
         }
     }
@@ -54,10 +50,10 @@ public class CommentService implements ICommentService {
         else if(iCommentDao.selectCountByTidCtime(iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)),ctime)==0){
             return Resp.fail("431","评论不存在！");
         }
-        // 不再区分 uid
-//        else if(iCommentDao.selectUidByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),ctime)!=iUserDao.selectUidByEmail(email)&&iTopicDao.selectUidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname))!=iUserDao.selectUidByEmail(email)){
-//            return Resp.fail("488","用户无权限！");
-//        }
+        else if(iCommentDao.selectUidByTidCtime(iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)),ctime)!=iUserDao.selectUidByEmail(email) &&
+                iTopicDao.selectUidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname))!=iUserDao.selectUidByEmail(email)){
+            return Resp.fail("488","用户无权限！");
+        }
         else{
             iCommentDao.deleteByTidCtime(iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)),ctime);
             return Resp.success(null);

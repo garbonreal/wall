@@ -4,6 +4,7 @@
       :data="tableData"
       border
       style="width: 100%;">
+
       <el-table-column
         prop="mname"
         label="主题名"

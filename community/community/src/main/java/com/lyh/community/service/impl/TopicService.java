@@ -49,11 +49,27 @@ public class TopicService implements ITopicService {
         else if(iTopicDao.selectCountByTtimeMid(ttime, iModuleDao.selectMidByMname(mname))==0){
             return Resp.fail("421","话题不存在！");
         }
-        else if(iTopicDao.selectUidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname))!=iUserDao.selectUidByEmail(email)&&iModuleDao.selectUidByMid(iModuleDao.selectMidByMname(mname))!=iUserDao.selectUidByEmail(email)){
+        else if(iTopicDao.selectUidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname))!=iUserDao.selectUidByEmail(email)){
             return Resp.fail("488","用户无权限！");
         }
         else{
             iTopicDao.deleteByTtimeMid(ttime,iModuleDao.selectMidByMname(mname));
+            return Resp.success(null);
+        }
+    }
+
+    @Override
+    public Resp<Topic> deleteFavoriteTopic(String ttime, String email, String password, String mname) {
+        if(iUserDao.selectCountByEmailPassword(email,DigestUtils.md5DigestAsHex(password.getBytes()))==0){
+            return Resp.fail("499","身份验证错误！");
+        }
+        else if(iCollectTopicDao.selectCountByUidTid(iUserDao.selectUidByEmail(email),
+                iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)))==0){
+            return Resp.fail("421","话题不存在！");
+        }
+        else{
+            iCollectTopicDao.deleteByUidTid(iUserDao.selectUidByEmail(email),
+                    iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)));
             return Resp.success(null);
         }
     }
@@ -82,7 +98,7 @@ public class TopicService implements ITopicService {
             List<Topic> favoriteTopic=iCollectTopicDao.selectAllByUid(uid);
             System.out.println("uid="+uid);
             for(Topic t:favoriteTopic){
-                System.out.println(t.getMname()+";"+t.getTname()+";"+t.getTcontent()+";"+t.getUname());
+                System.out.println(t.getMname()+";"+t.getTtime()+";"+t.getTcontent()+";"+t.getUname());
                 if(t.getTanonymous()==0) t.setUname("匿名");
             }
             PageInfo<Topic> pageInfo = new PageInfo<Topic>(favoriteTopic);
