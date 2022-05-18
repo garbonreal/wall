@@ -77,6 +77,8 @@ public class CommentService implements ICommentService {
                 if(comment.getCanonymous()==0){
                     comment.setUname("匿名");
                 }
+                int clike=iLikeCommentDao.selectCountByCid(comment.getCid());
+                comment.setClike(clike);
             }
             PageInfo<Comment> pageInfo = new PageInfo<Comment>(CommentList);
             System.out.print(pageInfo);

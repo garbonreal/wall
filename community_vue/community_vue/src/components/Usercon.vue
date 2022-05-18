@@ -15,12 +15,12 @@
           <el-menu-item @click="$router.push('/personFavorite')" style="height: 15%">
             <i class="el-icon-star-off"></i>我的收藏
           </el-menu-item>
-          <el-menu-item @click="$router.push('/personModule')" style="height: 15%">
-            <i class="el-icon-takeaway-box"></i>我的板块
-          </el-menu-item>
-          <el-menu-item @click="$router.push('/personTopic')" style="height: 15%">
-            <i class="el-icon-chat-line-round"></i>我的话题
-          </el-menu-item>
+<!--          <el-menu-item @click="$router.push('/personModule')" style="height: 15%">-->
+<!--            <i class="el-icon-takeaway-box"></i>我的板块-->
+<!--          </el-menu-item>-->
+<!--          <el-menu-item @click="$router.push('/personTopic')" style="height: 15%">-->
+<!--            <i class="el-icon-chat-line-round"></i>我的话题-->
+<!--          </el-menu-item>-->
         </el-menu>
       </el-aside>
       <el-container>

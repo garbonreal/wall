@@ -131,7 +131,6 @@
             }else if(resp.data.code=="421"){
               alert("收藏失败！话题不见了？！")
             }else{
-              // alert("点赞成功！已有"+_this.clike+'人点赞该评论！')
               alert("话题收藏成功！")
               // location.reload();
             }

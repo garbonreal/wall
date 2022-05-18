@@ -108,6 +108,10 @@ public class TopicService implements ITopicService {
                 if(topic.getTanonymous()==0){
                     topic.setUname("匿名");
                 }
+                //添加clike属性
+                int clike=iLikeTopicDao.selectCountByTid(topic.getTid());
+                // System.out.println("tid="+topic.getTid()+"; clike="+clike);
+                topic.setClike(clike);
             }
             PageInfo<Topic> pageInfo = new PageInfo<Topic>(TopicList);
 

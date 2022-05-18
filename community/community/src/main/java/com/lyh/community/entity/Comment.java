@@ -13,7 +13,20 @@ public class Comment {
     private int tid;
     private int canonymous;
     private String uname;
-
+    private int clike=0;
+    
+    public int getClike() {
+        return clike;
+    }
+    
+    public void setCanonymous(int canonymous) {
+        this.canonymous = canonymous;
+    }
+    
+    public void setClike(int clike) {
+        this.clike = clike;
+    }
+    
     public int getCid() {
         return cid;
     }

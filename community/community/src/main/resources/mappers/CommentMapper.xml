@@ -28,7 +28,7 @@
 		select user.uname, comment.*
 		from comment,
 				 user
-		where tid = #{tid}
+		where tid = #{tid} and user.uid=comment.uid
 	</select>
 	
 	<select id="selectCountByTidCtime" resultType="int" parameterType="com.lyh.community.entity.Comment">
