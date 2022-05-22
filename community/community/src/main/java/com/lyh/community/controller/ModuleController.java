@@ -22,22 +22,6 @@ public class ModuleController {
     @Autowired
     private IModuleService iModuleService;
 
-//    @RequestMapping(value = "/createModule",method = RequestMethod.POST)
-//    private Resp<Module> createModule(String mname, String intro, String email, String password){
-//        if(email.length()>40||password.length()>40||intro.length()>100||mname.length()>40){
-//            return Resp.fail("777","参数错误！");
-//        }
-//        return iModuleService.createModule(mname, intro, email, password);
-//    }
-
-//    @RequestMapping(value = "/deleteModule",method = RequestMethod.POST)
-//    private Resp<Module> deleteModule(String mname, String email, String password){
-//        if(email.length()>40||password.length()>40||mname.length()>40){
-//            return Resp.fail("777","参数错误！");
-//        }
-//        return iModuleService.deleteModule(mname, email, password);
-//    }
-
     @RequestMapping(value = "/showModuleByUid",method = RequestMethod.POST)
     private Resp<PageInfo<Module>> showModuleByUid(String email, String password, int pageNum, int pageSize){
         if(email.length()>40||password.length()>40){

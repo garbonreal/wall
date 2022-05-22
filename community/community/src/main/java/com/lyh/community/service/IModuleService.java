@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public interface IModuleService {
-//    Resp<Module> createModule(String mname, String intro, String email, String password);
-//
-//    Resp<Module> deleteModule(String mname, String email, String password);
 
     Resp<PageInfo<Module>> showModuleByUid(String email, String password, int pageNum, int pageSize);
 

@@ -29,7 +29,7 @@
       <el-table-column
         fixed="right"
         label="操作"
-        width="200">
+        width="250">
         <template slot-scope="scope">
           <el-button v-on:click="moreinfro(scope.row)" type="text" size="small">查看</el-button>
           <el-button @click="tlike(scope.row)" type="text" size="small">点赞
@@ -65,11 +65,9 @@
     name: "module_topic",
     methods:{
       page(currentPage){
-        alert(currentPage)
         const _this=this;
         let mname = this.$route.query.mname;
         this.$axios.post('http://localhost:8080/topic/showTopicByModule?mname='+mname+'&pageNum='+currentPage+'&pageSize=5').then(function (resp) {
-          alert(resp.data)
           _this.tableData=resp.data.body.list
           _this.total=resp.data.body.total
         })
@@ -123,7 +121,6 @@
           params.append('ttime',num.ttime);
           params.append('mname',_this.Varall._currentmname);
           this.$axios.post('http://localhost:8080/topic/collectTopic',params).then(function (resp) {
-            alert(params);
             if(resp.data.code=="499"){
               alert("收藏失败：身份验证错误！原因可能是密码错误或邮箱输入错误")
             }else if(resp.data.code=="423"){

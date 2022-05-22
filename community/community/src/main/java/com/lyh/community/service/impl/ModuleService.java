@@ -20,37 +20,6 @@ public class ModuleService implements IModuleService {
     @Autowired
     private IUserDao iUserDao;
 
-//    @Override
-//    public Resp<Module> createModule(String mname, String intro, String email, String password) {
-//        if(iUserDao.selectCountByEmailPassword(email, DigestUtils.md5DigestAsHex(password.getBytes()))==0){
-//            return Resp.fail("499","身份验证错误！");
-//        }
-//        else if(iModuleDao.selectCountByMname(mname)==1){
-//            return Resp.fail("410","板块已存在！");
-//        }
-//        else{
-//            iModuleDao.insertByMnameIntroUid(mname,intro,iUserDao.selectUidByEmail(email));
-//            return Resp.success(null);
-//        }
-//    }
-//
-//    @Override
-//    public Resp<Module> deleteModule(String mname, String email, String password) {
-//        if(iUserDao.selectCountByEmailPassword(email,DigestUtils.md5DigestAsHex(password.getBytes()))==0){
-//            return Resp.fail("499","身份验证错误！");
-//        }
-//        else if(iModuleDao.selectCountByMname(mname)==0){
-//            return Resp.fail("411","板块不存在！");
-//        }
-//        else if(iModuleDao.selectUidByMname(mname)!=iUserDao.selectUidByEmail(email)){
-//            return Resp.fail("488","用户无权限！");
-//        }
-//        else{
-//            iModuleDao.deleteByMname(mname);
-//            return Resp.success(null);
-//        }
-//    }
-
     @Override
     public Resp<PageInfo<Module>> showModuleByUid(String email, String password, int pageNum, int pageSize) {
         if(iUserDao.selectCountByEmailPassword(email,DigestUtils.md5DigestAsHex(password.getBytes()))==0){

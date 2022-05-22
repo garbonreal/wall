@@ -70,10 +70,10 @@
       name: "topic_comment",
       methods:{
         page(currentPage){
-          alert(currentPage)
           const _this=this;
           let ttime = _this.$route.query.ttime;
-          this.$axios.post('http://localhost:8080/comment/showCommentByTopic?ttime='+ttime+'&pageNum='+currentPage+'&pageSize=5'+'&mname='+_this.Varall._currentmname).then(function (resp) {
+          let mname = _this.$route.query.mname
+          this.$axios.post('http://localhost:8080/comment/showCommentByTopic?ttime='+ttime+'&pageNum='+currentPage+'&pageSize=5'+'&mname='+mname).then(function (resp) {
             console.log(resp)
             _this.tableData=resp.data.body.list
             _this.total=resp.data.body.total

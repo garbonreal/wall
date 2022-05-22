@@ -11,17 +11,10 @@ import java.util.List;
 public interface IModuleDao {
     int selectCountByMname(@Param("mname") String mname);
 
-    void insertByMnameIntroUid(@Param("mname") String mname, @Param("intro") String intro, @Param("uid") int uid);
-
-    void deleteByMname(@Param("mname") String mname);
-
-    int selectUidByMname(@Param("mname") String mname);
-
     List<Module> selectAllByUid(@Param("uid") int uid);
 
     List<Module> selectAll();
 
     int selectMidByMname(@Param("mname") String mname);
 
-    int selectUidByMid(@Param("mid") int mid);
 }

@@ -25,8 +25,6 @@ public class TopicService implements ITopicService {
     @Autowired
     private ILikeTopicDao iLikeTopicDao;
     @Autowired
-    private IFavoriteDao iFavoriteDao;
-    @Autowired
     private ICollectTopicDao iCollectTopicDao;
 
     @Override

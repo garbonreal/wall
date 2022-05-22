@@ -87,16 +87,12 @@ public class CommentService implements ICommentService {
         if(iUserDao.selectCountByEmailPassword(email,DigestUtils.md5DigestAsHex(password.getBytes()))==0){
             return Resp.fail("499","身份验证错误！");
         }
-//        else if(iCommentDao.selectCountByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),num)==0){
-//            return Resp.fail("431","评论不存在！");
-//        }
         else if(iLikeCommentDao.selectCountByUidCid(iUserDao.selectUidByEmail(email),iCommentDao.selectCidByTidCtime(iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)),ctime))==1){
             return Resp.fail("432","已经赞过！");
         }
         else{
             int cid=iCommentDao.selectCidByTidCtime(iTopicDao.selectTidByTtimeMid(ttime,iModuleDao.selectMidByMname(mname)),ctime);
             iLikeCommentDao.insertByUidCid(iUserDao.selectUidByEmail(email),cid);
-            // iCommentDao.updateAddLikeByTidCtime(iTopicDao.selectTidByTnameMid(ttime,iModuleDao.selectMidByMname(mname)),ctime);
             return Resp.success(null);
         }
     }

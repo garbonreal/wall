@@ -25,8 +25,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register",method = RequestMethod.POST)
-    private Resp<User> register(String uname, String password, String email, String code){
-        if(email.length()>40||password.length()>40){ //||uname.length()>20||code.length()>4){
+    private Resp<User> register(String uname, String password, String email){
+        if(email.length()>40||password.length()>40){
             return Resp.fail("777","参数错误！");
         }
         System.out.print(password);

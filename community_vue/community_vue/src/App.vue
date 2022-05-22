@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header height="100px">
+      <el-header height="80px" style="background-color: #EBEBEB; border-color: cadetblue">
         <router-link to="/">
-          <el-button class="logo-text" style="font-size:1.8em" id="logo">Wall<span style="color:#FF6347;font-size:2.3em;">C</span>ommunity</el-button>
+          <el-button class="logo-text" style="font-size:3em;" id="logo">万能墙</el-button>
         </router-link>
         <span class="row-bg" style="float: right" v-show="!this.Varall._isLogin">
           <router-link to="/register">
@@ -52,25 +52,25 @@
   }
 
   .el-header {
-    background-color: #B3C0D1;
+    background-color: #EBEBEB;
     color: #333;
     line-height: 60px;
   }
 
   .el-aside {
-    color: #333;
+    color: #EBEBEB;
   }
 
   #logo{
-    color: #fff;
-    background-color: #B3C0D1;
+    color: darkseagreen;
+    background-color: #EBEBEB;
     border: none;
   }
 
   .el-button--primary {
     color: #fff;
-    background-color: #FC813B;
-    border-color: #FC813B;
+    background-color: darkseagreen;
+    border-color: #42b983;
   }
 </style>
 

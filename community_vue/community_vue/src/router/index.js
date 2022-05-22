@@ -32,7 +32,7 @@ export default new Router({
       name: 'category',
       component:Index,
       meta:{
-        title: "Wall Community"
+        title: "万能墙"
       },
       redirect: '/module',
       children:[
@@ -73,7 +73,7 @@ export default new Router({
       name: 'register',
       component: Register,
       meta:{
-        title: "Wall 注册"
+        title: "万能墙 注册"
       }
     },
     {
@@ -81,7 +81,7 @@ export default new Router({
       name: 'login',
       component: Login,
       meta:{
-        title: "Wall 登录"
+        title: "万能墙 登录"
       }
     },
     {
@@ -89,7 +89,7 @@ export default new Router({
       name: 'usercon',
       component: Usercon,
       meta:{
-        title: "Wall 用户界面"
+        title: "万能墙 用户界面"
       },
       redirect: '/infoShow',
       children:[

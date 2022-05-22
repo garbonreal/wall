@@ -64,13 +64,13 @@
         console.log(row);
       },
       moreinfro(num){
-        this.Varall._currenttname = num.tname;
+        this.Varall._currenttime = num.ttime;
         this.Varall._currentmname = num.mname;
         sessionStorage.setItem("currentmname",num.mname);
-        sessionStorage.setItem("currenttname",num.tname);
+        sessionStorage.setItem("currenttime",num.ttime);
         this.$router.push({
           path: "/topic_comment", query: {
-            tname: num.tname,
+            ttime: num.ttime,
             mname: num.mname
           }
         })
@@ -148,8 +148,6 @@
             params.append('password', _this.Varall._password);
             params.append('ttime',num.ttime);
             params.append('mname',num.mname);
-
-            alert(params);
 
             this.$axios.post('http://localhost:8080/topic/deleteFavoriteTopic',params).then(function (resp) {
               console.log(resp)
