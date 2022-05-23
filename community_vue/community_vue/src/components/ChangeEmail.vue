@@ -94,7 +94,7 @@
           params.append('newemail', _this.ruleForm.newemail);
           params.append('password', _this.Varall._password);
           params.append('code', _this.ruleForm.code);
-          axios.post('http://localhost:8080/user/changeEmail', params)
+          axios.post('http://1.116.57.190:8080/user/changeEmail', params)
             .then(function (resp) {
               if(resp.data.code==="499"){
                 alert("身份验证错误！");
@@ -138,7 +138,7 @@
 
           const params = new URLSearchParams();
           params.append('email', _this.ruleForm.newemail);
-          axios.post('http://localhost:8080/sms/sendEmailCode', params)
+          axios.post('http://1.116.57.190:8080/sms/sendEmailCode', params)
             .then(function (resp) {
               const TIME_COUNT = 30;
               if (!_this.timer) {

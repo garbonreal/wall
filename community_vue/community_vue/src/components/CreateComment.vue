@@ -71,7 +71,7 @@
               params.append('mname', _this.Varall._currentmname);
               params.append('ccanonymous', _this.ruleForm.canonymous);
               params.append('ctime', _this.ruleForm.ctime);
-              this.$axios.post('http://localhost:8080/comment/createComment',params).then(function (resp) {
+              this.$axios.post('http://1.116.57.190:8080/comment/createComment',params).then(function (resp) {
                 console.log(resp)
                 if(resp.data.code=="499"){
                   alert("评论失败：身份验证错误！原因可能是密码错误或邮箱输入错误")

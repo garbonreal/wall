@@ -79,7 +79,7 @@
         params.append('password', _this.Varall._password);
         params.append('pageNum',currentPage);
         params.append('pageSize',"10");
-        this.$axios.post('http://localhost:8080/topic/showTopicByUid',params).then(function (resp) {
+        this.$axios.post('http://1.116.57.190:8080/topic/showTopicByUid',params).then(function (resp) {
           _this.tableData=resp.data.body.list
           _this.total=resp.data.body.pages
         });
@@ -92,7 +92,7 @@
           params.append('password', _this.Varall._password);
           params.append('tname',num.tname);
           params.append('mname',num.mname);
-          this.$axios.post('http://localhost:8080/topic/likeTopic',params).then(function (resp) {
+          this.$axios.post('http://1.116.57.190:8080/topic/likeTopic',params).then(function (resp) {
             console.log(resp)
             if(resp.data.code=="499"){
               alert("点赞失败：身份验证错误！原因可能是密码错误或邮箱输入错误")
@@ -118,7 +118,7 @@
           params.append('password', _this.Varall._password);
           params.append('tname',num.tname);
           params.append('mname',num.mname);
-          this.$axios.post('http://localhost:8080/topic/favorite',params).then(function (resp) {
+          this.$axios.post('http://1.116.57.190:8080/topic/favorite',params).then(function (resp) {
             console.log(resp)
             if(resp.data.code=="499"){
               alert("收藏失败：身份验证错误！原因可能是密码错误或邮箱输入错误")
@@ -145,7 +145,7 @@
             params.append('password', _this.Varall._password);
             params.append('tname',num.tname);
             params.append('mname',num.mname);
-            this.$axios.post('http://localhost:8080/topic/deleteTopic',params).then(function (resp) {
+            this.$axios.post('http://1.116.57.190:8080/topic/deleteTopic',params).then(function (resp) {
               console.log(resp)
               if(resp.data.code=="499"){
                 alert("删除话题失败：身份验证错误！原因可能是密码错误或邮箱输入错误")
@@ -174,7 +174,7 @@
       params.append('password', _this.Varall._password);
       params.append('pageNum',"1");
       params.append('pageSize',"10");
-      this.$axios.post('http://localhost:8080/topic/showTopicByUid',params).then(function (resp) {
+      this.$axios.post('http://1.116.57.190:8080/topic/showTopicByUid',params).then(function (resp) {
         _this.tableData=resp.data.body.list
         _this.total=resp.data.body.pages
       });

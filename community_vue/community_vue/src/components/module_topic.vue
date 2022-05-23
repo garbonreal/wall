@@ -67,7 +67,7 @@
       page(currentPage){
         const _this=this;
         let mname = this.$route.query.mname;
-        this.$axios.post('http://localhost:8080/topic/showTopicByModule?mname='+mname+'&pageNum='+currentPage+'&pageSize=5').then(function (resp) {
+        this.$axios.post('http://1.116.57.190:8080/topic/showTopicByModule?mname='+mname+'&pageNum='+currentPage+'&pageSize=5').then(function (resp) {
           _this.tableData=resp.data.body.list
           _this.total=resp.data.body.total
         })
@@ -94,7 +94,7 @@
           params.append('password', _this.Varall._password);
           params.append('ttime',num.ttime);
           params.append('mname',_this.Varall._currentmname);
-          this.$axios.post('http://localhost:8080/topic/likeTopic',params).then(function (resp) {
+          this.$axios.post('http://1.116.57.190:8080/topic/likeTopic',params).then(function (resp) {
             console.log(resp)
             if(resp.data.code=="499"){
               alert("点赞失败：身份验证错误！原因可能是密码错误或邮箱输入错误")
@@ -120,7 +120,7 @@
           params.append('password', _this.Varall._password);
           params.append('ttime',num.ttime);
           params.append('mname',_this.Varall._currentmname);
-          this.$axios.post('http://localhost:8080/topic/collectTopic',params).then(function (resp) {
+          this.$axios.post('http://1.116.57.190:8080/topic/collectTopic',params).then(function (resp) {
             if(resp.data.code=="499"){
               alert("收藏失败：身份验证错误！原因可能是密码错误或邮箱输入错误")
             }else if(resp.data.code=="423"){
@@ -146,7 +146,7 @@
           params.append('ttime',num.ttime);
           params.append('mname',_this.Varall._currentmname);
 
-          this.$axios.post('http://localhost:8080/topic/deleteTopic',params).then(function (resp) {
+          this.$axios.post('http://1.116.57.190:8080/topic/deleteTopic',params).then(function (resp) {
             console.log(resp)
             if(resp.data.code=="499"){
               alert("删除话题失败：身份验证错误！原因可能是密码错误或邮箱输入错误")
@@ -177,7 +177,7 @@
     },created(){
       const _this=this;
       let mname = this.$route.query.mname;
-      this.$axios.post('http://localhost:8080/topic/showTopicByModule?mname='+mname+'&pageNum=1&pageSize=5').then(function (resp) {
+      this.$axios.post('http://1.116.57.190:8080/topic/showTopicByModule?mname='+mname+'&pageNum=1&pageSize=5').then(function (resp) {
         console.log(resp.data)
         _this.tableData=resp.data.body.list
         _this.total=resp.data.body.total

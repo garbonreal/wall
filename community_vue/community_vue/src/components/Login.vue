@@ -70,7 +70,7 @@
           const params = new URLSearchParams();
           params.append('email', _this.ruleForm.email);
           params.append('password', _this.ruleForm.pass);
-          axios.post('http://localhost:8080/user/login', params)
+          axios.post('http://1.116.57.190:8080/user/login', params)
             .then(function (resp) {
               if(resp.data.code==="401"){
                 alert("用户不存在！");

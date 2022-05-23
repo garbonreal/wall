@@ -73,7 +73,7 @@
           const _this=this;
           let ttime = _this.$route.query.ttime;
           let mname = _this.$route.query.mname
-          this.$axios.post('http://localhost:8080/comment/showCommentByTopic?ttime='+ttime+'&pageNum='+currentPage+'&pageSize=5'+'&mname='+mname).then(function (resp) {
+          this.$axios.post('http://1.116.57.190:8080/comment/showCommentByTopic?ttime='+ttime+'&pageNum='+currentPage+'&pageSize=5'+'&mname='+mname).then(function (resp) {
             console.log(resp)
             _this.tableData=resp.data.body.list
             _this.total=resp.data.body.total
@@ -101,7 +101,7 @@
             params.append('ctime',num.ctime);
             // alert(num.num)
             // alert(tname)
-            this.$axios.post('http://localhost:8080/comment/deleteComment',params).then(function (resp) {
+            this.$axios.post('http://1.116.57.190:8080/comment/deleteComment',params).then(function (resp) {
               console.log(resp)
               if(resp.data.code=="499"){
                 alert("删除评论失败：身份验证错误！原因可能是密码错误或邮箱输入错误")
@@ -133,7 +133,7 @@
             params.append('ttime',ttime);
             params.append('ctime',num.ctime);
             params.append('mname',_this.Varall._currentmname);
-            this.$axios.post('http://localhost:8080/comment/likeComment',params).then(function (resp) {
+            this.$axios.post('http://1.116.57.190:8080/comment/likeComment',params).then(function (resp) {
               console.log(resp)
               if(resp.data.code=="499"){
                 alert("点赞失败：身份验证错误！原因可能是密码错误或邮箱输入错误")
@@ -162,7 +162,7 @@
       },created(){
         const _this=this;
         let ttime = this.$route.query.ttime;
-        this.$axios.post('http://localhost:8080/comment/showCommentByTopic?ttime='+ttime+'&pageNum=1&pageSize=5'+'&mname='+_this.Varall._currentmname).then(function (resp) {
+        this.$axios.post('http://1.116.57.190:8080/comment/showCommentByTopic?ttime='+ttime+'&pageNum=1&pageSize=5'+'&mname='+_this.Varall._currentmname).then(function (resp) {
           console.log(resp)
           _this.tableData=resp.data.body.list;
           _this.total=resp.data.body.total;
