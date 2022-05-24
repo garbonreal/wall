@@ -65,7 +65,7 @@
           params.append('password', _this.Varall._password);
           params.append('mname',num.mname);
           // assert(num.mname)
-          this.$axios.post('http://localhost:8080/module/deleteModule',params).then(function (resp) {
+          this.$axios.post('http://1.116.57.190:8080/module/deleteModule',params).then(function (resp) {
             console.log(resp)
             if(resp.data.code=="499"){
               alert("删除失败：身份验证错误！原因可能是密码错误或邮箱输入错误")
@@ -98,7 +98,7 @@
       },
       page(currentPage){
         const _this=this
-        this.$axios.post('http://localhost:8080/module/showModule?pageNum='+currentPage+'&pageSize=6').then(function (resp) {
+        this.$axios.post('http://1.116.57.190:8080/module/showModule?pageNum='+currentPage+'&pageSize=6').then(function (resp) {
           _this.tableData=resp.data.body.list
           _this.total=resp.data.body.pages
         })
@@ -107,7 +107,7 @@
     },
     created(){
       const _this=this
-      this.$axios.post('http://localhost:8080/module/showModule?pageNum=1&pageSize=6').then(function (resp) {
+      this.$axios.post('http://1.116.57.190:8080/module/showModule?pageNum=1&pageSize=6').then(function (resp) {
         _this.tableData=resp.data.body.list
         _this.total=resp.data.body.pages
       })

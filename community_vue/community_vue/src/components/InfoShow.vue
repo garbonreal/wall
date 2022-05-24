@@ -154,7 +154,7 @@
           if(_this.ruleForm.age==null)_this.ruleForm.age=-1;
           params.append('age', _this.ruleForm.age);
           params.append('motto', _this.ruleForm.motto);
-          axios.post('http://localhost:8080/user/modifybasic', params)
+          axios.post('http://1.116.57.190:8080/user/modifybasic', params)
             .then(function (resp) {
               if(resp.data.code==="499"){
                 alert("身份验证错误！");

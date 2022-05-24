@@ -146,7 +146,7 @@
             params.append('password', _this.ruleForm.pass);
             params.append('uname', _this.ruleForm.name);
             params.append('code', _this.ruleForm.code);
-            axios.post('http://localhost:8080/user/register', params)
+            axios.post('http://1.116.57.190:8080/user/register', params)
               .then(function (resp) {
                 if(resp.data.code==="403"){
                   alert("邮箱已注册！");
@@ -193,7 +193,7 @@
 
             const params = new URLSearchParams();
             params.append('email', _this.ruleForm.email);
-            axios.post('http://localhost:8080/sms/sendEmailCode', params)
+            axios.post('http://1.116.57.190:8080/sms/sendEmailCode', params)
               .then(function (resp) {
                 const TIME_COUNT = 30;
                 if (!_this.timer) {

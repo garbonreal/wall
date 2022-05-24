@@ -72,7 +72,7 @@
           params.append('email', _this.Varall._email);
           params.append('newpassword', _this.ruleForm.newpassword);
           params.append('oldpassword', _this.ruleForm.oldpassword);
-          axios.post('http://localhost:8080/user/changePassword', params)
+          axios.post('http://1.116.57.190:8080/user/changePassword', params)
             .then(function (resp) {
               if(resp.data.code==="499"){
                 alert("密码错误！");
